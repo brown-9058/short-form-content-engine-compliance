@@ -1,24 +1,23 @@
-# Static compliance site
+# Short Form Content Engine public compliance site
 
-Not deployed. No secrets, source code, analytics or external scripts belong here.
+Static GitHub Pages site for the private desktop creator workflow. This repository contains public product/policy information only; no application source, credentials or upload records belong here.
 
-1. Replace contact_email and public_site_url in site.toml. Use your chosen public contact email and final HTTPS Pages URL.
-2. Obtain the official logo as instructed in assets/README.md.
-3. From the private project: `.venv/bin/python scripts/build_compliance_site.py` then `youtube audit-readiness`.
-4. Publish ONLY this directory in a separate public repository; never publish the private application repository.
+## Stable URLs
 
-Example user-operated deployment (replace YOUR_USER; run from the project root):
+- Home: https://brown-9058.github.io/short-form-content-engine-compliance/
+- TikTok integration: https://brown-9058.github.io/short-form-content-engine-compliance/tiktok/
+- TikTok privacy: https://brown-9058.github.io/short-form-content-engine-compliance/tiktok/privacy/
+- TikTok terms: https://brown-9058.github.io/short-form-content-engine-compliance/tiktok/terms/
+- Existing YouTube/API privacy: https://brown-9058.github.io/short-form-content-engine-compliance/privacy.html
+- Existing YouTube/API terms: https://brown-9058.github.io/short-form-content-engine-compliance/terms.html
 
-```sh
-mkdir ../short-form-content-engine-compliance
-cp -R compliance-site/. ../short-form-content-engine-compliance/
-cd ../short-form-content-engine-compliance
-git init -b main
-git add .
-git commit -m "publish compliance documentation"
-gh repo create YOUR_USER/short-form-content-engine-compliance --public --source=. --push
-gh api --method POST repos/YOUR_USER/short-form-content-engine-compliance/pages -f 'source[branch]=main' -f 'source[path]=/'
-```
+GitHub Pages serves `main` at the repository root. `.nojekyll` keeps these files static. Do not rename existing policy URLs, move verification files or regenerate the TikTok verification signature.
 
-Final URL: `https://YOUR_USER.github.io/short-form-content-engine-compliance/`.
-Check all links and logo, then capture evidence. No workflow is enabled here. The safe deployment option is GitHub Pages branch deployment above, which only copies static site files and needs no application secrets. Verify `git ls-files` in the new repo before pushing. Do not copy the private project itself.
+## Local validation and preview
+
+Run `python3 scripts/validate_site.py`. No build, dependencies or JavaScript are required.
+For a preview with the same project URL prefix, run `python3 -m http.server 8765 --directory ..` from this repository and open `http://localhost:8765/short-form-content-engine-compliance/`.
+
+The Developer Portal configuration includes `user.info.basic` and `video.upload`. The current local adapter only requests `video.upload` and confirms the identifier returned by OAuth; the site explicitly distinguishes configured basic-profile permission from implemented profile retrieval. Do not claim production approval, public availability or Direct Post functionality. Local captions/credits remain creator suggestions, not upload API fields.
+
+Deployment: commit only public site changes and push this repository's `main` branch. Verify all stable URLs and the unchanged root verification file after GitHub Pages finishes deploying. Do not copy or publish the private application repository. Contact: ethan@ibrowns.com.
